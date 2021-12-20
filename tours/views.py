@@ -1,13 +1,15 @@
 import random
+
 from django.http import Http404
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseServerError
 from django.views import View
+
 from tours import data
 
 
 class MainView(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         random_tour_ids = random.sample(range(1, len(data.tours)), 6)
         tours = {tour_id: data.tours[tour_id] for tour_id in random_tour_ids}
         return render(
@@ -20,7 +22,7 @@ class MainView(View):
 
 
 class DepartureView(View):
-    def get(self, request, departure, *args, **kwargs):
+    def get(self, request, departure):
         if departure not in data.departures:
             raise Http404
 
@@ -48,7 +50,7 @@ class DepartureView(View):
 
 
 class TourView(View):
-    def get(self, request, id, *args, **kwargs):
+    def get(self, request, id):
         if id not in data.tours:
             raise Http404
 
