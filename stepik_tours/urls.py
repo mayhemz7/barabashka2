@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.urls import path
 
-from tours.views import main_view, departure_view, tour_view, custom_handler404, custom_handler500
+from tours.views import MainView, DepartureView, TourView, custom_handler404, custom_handler500
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_view),
-    path('departure/<str:departure>/', departure_view),
-    path('tour/<int:id>/', tour_view),
+    path('', MainView.as_view()),
+    path('departure/<str:departure>/', DepartureView.as_view()),
+    path('tour/<int:id>/', TourView.as_view()),
 ]
 
 
